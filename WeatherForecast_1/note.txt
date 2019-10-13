@@ -1,0 +1,108 @@
+ajax: 异步的js与xml
+
+同步，异步
+
+ajax：在没有刷新整个页面的情况下，局部更细数据
+
+创建ajax四个步骤
+    创建ajax对象
+    监听ajax对象状态变化
+    建立服务器连接
+    发送请求
+
+ajax的状态码
+0: 请求未初始化, 只是常见ajax对象
+1: 已发送请求, 执行send
+2: 已接收
+3: 请求处理中
+4: 请求完成并且成功响应
+
+get， post区别
+get: 一般用于获取数据，传递参数挂在url地址，http://www.xx.com?id=10&age=10
+post: 一般用于获取敏感数据，比如登录，注册，传递的参数会保存在请求体, http://www.xx.com
+
+jq
+$.get({
+    //请求地址
+    url: '',
+    //请求参数
+    data: {},
+    //请求成功执行的回调函数
+    success: function () {},
+
+    //请求失败执行的回调函数
+    error: function () {}
+})
+
+$.post({
+    url: '',
+    data: {},
+    success: function () {}
+    error: function () {}
+})
+
+$.ajax({
+    type: 'get',
+    url: '',
+    data: '',
+    //响应的数据类型
+    dataType: 'jsonp',
+
+    success: function () {},
+    error: function () {}
+})
+
+//ajax发送请求之前触发
+$(document).ajaxSend(function () {
+
+})
+
+//请求成功
+$(document).ajaxSuccess(function (a1, a2, a3, a4) {
+
+})
+
+//请求成功之后
+$(document).ajaxComplete(function () {
+
+})
+
+
+同源策略：协议相同，域名相同，端口相同
+
+提高浏览器访问的安全性
+
+http://www.baidu.com:8000/home/index.html
+
+同源
+http://www.baidu.com:8000/my/index.html
+
+不同源(跨域)
+https://www.baidu.com:8000/home/index.html
+http://baidu.com:8000/home/index.html
+http://api.baidu.com:8000/home/index.html
+http://www.baidu.com:8001/home/index.html
+
+
+jsonp: js对象表示法
+
+script: 不受同源策略限制，可以在任何服务器加载js脚本
+
+jsonp跨域原理
+
+    创建一个script
+
+    将请求地址赋值给script的src属性，  <script src="https://www.apiopen.top/weatherApi"></script>
+
+    将后台约定回调函数名称以参数的形式挂在请求地址中 <script src="https://www.apiopen.top/weatherApi?callback="></script>
+
+    将一个全局函数作为后台约定回调函数的值 <script src="https://www.apiopen.top/weatherApi?callback=全局函数"></script>
+
+    全局函数处理后台响应数据
+
+    数据处理完成后，延迟移除script
+
+https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+(sInput.value)+'&json=1&p=3&cb=Aralic&oTime
+
+天气
+http://tianqiapi.com/
